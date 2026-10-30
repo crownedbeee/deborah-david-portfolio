@@ -832,6 +832,24 @@ body{background:var(--ink);}
 @media (min-width:900px){ .picker-d{width:310px;top:calc(100% + 10px);} .picker-d .picker-btns{width:240px;margin-left:auto;} }
 @media (max-width:899px){ .hero2-cut{margin-top:10px!important;} .picker-d .picker-btns{max-width:none;} }
 
+
+/* picker v4 (mobile/tablet): small, on the right, head touches DEBORAH again */
+@media (max-width:899px){
+  .hero2-cut{margin-top:calc(-1 * clamp(70px,13vw,190px))!important;}
+  .picker-d{position:absolute!important;right:0;top:calc(100% + 6px);width:92px!important;margin:0!important;z-index:4;text-align:right;}
+  .picker-d .picker-t{font-size:17px!important;line-height:1.05;margin:0 0 7px!important;}
+  .picker-d .picker-btns{display:grid;grid-template-columns:1fr;gap:6px;width:100%;}
+  .picker-d button{height:30px!important;font-size:11.5px!important;gap:6px!important;padding:0 6px;justify-content:flex-start;}
+  .picker-d button i{width:11px!important;height:11px!important;}
+  .picker-d .picker-note{font-size:10.5px!important;line-height:1.25;margin-top:6px;}
+}
+@media (max-width:374px){ .picker-d{width:84px!important;} .picker-d .picker-t{font-size:16px!important;} }
+@media (max-width:899px){ .picker-d .picker-note{display:none!important;} }
+
+/* hero v5: hair only just covers the name on phones/tablets + floor shadow */
+@media (max-width:899px){ .hero2-cut{margin-top:calc(-0.055 * 100vw)!important;} }
+.hero2-cut{background:radial-gradient(ellipse 48% 7% at 52% 94%, rgba(60,30,0,.55), rgba(60,30,0,.22) 55%, transparent 75%) no-repeat;}
+.ink.hero2 .hero2-cut{background:radial-gradient(ellipse 46% 6% at 52% 95%, rgba(223,164,44,.22), rgba(223,164,44,.08) 55%, transparent 75%) no-repeat;}
 </style>
 </head>
 <body>
@@ -1173,6 +1191,15 @@ function fitWords(){
     const w = s.getBoundingClientRect().width, W = el.clientWidth;
     if (w) s.style.fontSize = (100 * W / w).toFixed(2) + 'px';
   });
+  /* desktop hero: hair only just covers the bottom of DEBORAH */
+  const cut = main.querySelector('.hero2-cut'), nm = main.querySelector('.hero2-name .fit');
+  if (cut && nm) {
+    if (innerWidth >= 900) {
+      const fr = nm.getBoundingClientRect(), st = cut.parentElement.getBoundingClientRect();
+      const cap = st.height - Math.min(140, Math.max(70, innerWidth * .09));
+      cut.style.maxHeight = Math.round(Math.max(280, Math.min(cap, st.bottom - (fr.bottom - fr.height * .22)))) + 'px';
+    } else cut.style.maxHeight = '';
+  }
 }
 function equalize(){
   main.querySelectorAll('.proj-grid').forEach(g => {
