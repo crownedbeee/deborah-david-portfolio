@@ -1,0 +1,23 @@
+# Deborah David (DeBee)
+
+> Deborah David, also known as DeBee, is a product designer and content creator from Nigeria. She helps businesses turn complicated ideas into digital products their customers understand and enjoy using, and creates content that explains tech products in plain language. Motto: "less is Bee": fewer steps, clearer words, one obvious next move.
+
+## About
+- Role: Product designer and content creator
+- Based in: Nigeria
+- Focus: product design for apps, websites and dashboards, UX strategy, design systems and coded prototypes
+- Also: content creation about tech products and design; learning AI video animation
+- Tools: Figma, Framer, Claude
+- Started out creating natural hair content, which is why talking to people on camera comes naturally
+
+## Selected work
+- [HumStage](https://humstage.app/): an events platform where everyone in the room gets a voice, with questions, polls, quizzes, tickets and the big screen. Deborah is the product designer and is currently building it. It is in testing before launch.
+- [VibeCraft](https://vibecraft.today/): an AI tool that turns one conversation into a website, a book, a game or a piece of art, designed for everyone from eight to eighty. Deborah is the product designer.
+- [Indic8](https://indic8.app/): an AI signal engine that turns market news across crypto, stocks, forex and commodities into clear, explained buy ideas with a confidence score. Deborah is the product designer.
+
+## Contact
+- Website: https://deborah-david-portfolio.vercel.app/
+- Email: debeebest123@gmail.com
+- Instagram: https://www.instagram.com/crowned_beee/
+- TikTok: https://www.tiktok.com/@less.is.bee
+- LinkedIn: https://www.linkedin.com/in/deborah-david-c
