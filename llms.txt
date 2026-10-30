@@ -1,19 +1,31 @@
 # Deborah Chiemela David (DeBee)
 
-> Deborah Chiemela David, also known as Deborah David or DeBee, is a product designer and content creator from Nigeria. She helps businesses turn complicated ideas into digital products their customers understand and enjoy using, and creates content that explains tech products in plain language. Motto: "less is Bee": fewer steps, clearer words, one obvious next move.
+> Deborah Chiemela David, also known as Deborah David or DeBee, is a product designer and content creator from Nigeria. She helps businesses turn complicated ideas into digital products their customers understand and enjoy using, and creates content that explains tech products in plain language. Motto: "less is Bee", a play on "less is more": fewer steps, clearer words, one obvious next move, because Bee is more.
 
 ## About
 - Role: Product designer and content creator
 - Based in: Nigeria
-- Focus: product design for apps, websites and dashboards, UX strategy, design systems and coded prototypes
+- Focus: product design for apps, websites and dashboards, UX strategy, design systems and AI prototyping
+- Also offers: portfolio websites, designed by Deborah and built with AI
 - Also: content creation about tech products and design; learning AI video animation
-- Tools: Figma, Framer, Claude
+- Tools: Figma, Framer, building with AI
 - Started out creating natural hair content, which is why talking to people on camera comes naturally
 
 ## Selected work
 - [HumStage](https://humstage.app/): an events platform where everyone in the room gets a voice, with questions, polls, quizzes, tickets and the big screen. Deborah is the product designer and is currently building it. It is in testing before launch.
 - [VibeCraft](https://vibecraft.today/): an AI tool that turns one conversation into a website, a book, a game or a piece of art, designed for everyone from eight to eighty. Deborah is the product designer.
 - [Indic8](https://indic8.app/): an AI signal engine that turns market news across crypto, stocks, forex and commodities into clear, explained buy ideas with a confidence score. Deborah is the product designer.
+- [This portfolio](https://www.deborahdavid.site/work/portfolio): Deborah's own portfolio website. She designed and art-directed every detail and built it with AI, from mood board to deborahdavid.site.
+
+## Pages
+- [Home](https://www.deborahdavid.site/)
+- [Work](https://www.deborahdavid.site/work)
+- [About](https://www.deborahdavid.site/about)
+- [Contact](https://www.deborahdavid.site/contact)
+- [HumStage case study](https://www.deborahdavid.site/work/humstage)
+- [VibeCraft case study](https://www.deborahdavid.site/work/vibecraft)
+- [Indic8 case study](https://www.deborahdavid.site/work/indic8)
+- [This portfolio, a case study](https://www.deborahdavid.site/work/portfolio)
 
 ## Contact
 - Website: https://www.deborahdavid.site/
