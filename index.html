@@ -850,6 +850,11 @@ body{background:var(--ink);}
 @media (max-width:899px){ .hero2-cut{margin-top:calc(-0.055 * 100vw)!important;} }
 .hero2-cut{background:radial-gradient(ellipse 48% 7% at 52% 94%, rgba(60,30,0,.55), rgba(60,30,0,.22) 55%, transparent 75%) no-repeat;}
 .ink.hero2 .hero2-cut{background:radial-gradient(ellipse 46% 6% at 52% 95%, rgba(223,164,44,.22), rgba(223,164,44,.08) 55%, transparent 75%) no-repeat;}
+
+/* picker text a little smaller */
+.picker-d .picker-t{font-size:clamp(20px,1.75vw,26px)!important;}
+@media (max-width:899px){ .picker-d .picker-t{font-size:15px!important;} }
+@media (max-width:374px){ .picker-d .picker-t{font-size:14px!important;} }
 </style>
 </head>
 <body>
@@ -1197,7 +1202,7 @@ function fitWords(){
     if (innerWidth >= 900) {
       const fr = nm.getBoundingClientRect(), st = cut.parentElement.getBoundingClientRect();
       const cap = st.height - Math.min(140, Math.max(70, innerWidth * .09));
-      cut.style.maxHeight = Math.round(Math.max(280, Math.min(cap, st.bottom - (fr.bottom - fr.height * .22)))) + 'px';
+      cut.style.maxHeight = Math.round(Math.max(280, Math.min(cap, st.bottom - (fr.bottom - fr.height * .36)))) + 'px';
     } else cut.style.maxHeight = '';
   }
 }
