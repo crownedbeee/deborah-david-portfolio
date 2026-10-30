@@ -13,4 +13,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://deborah-david-portfolio.vercel.app/sitemap.xml
+Sitemap: https://www.deborahdavid.site/sitemap.xml
