@@ -15,20 +15,20 @@
 - [HumStage](https://humstage.app/): an events platform where everyone in the room gets a voice, with questions, polls, quizzes, tickets and the big screen. Deborah is the product designer and is currently building it. It is in testing before launch.
 - [VibeCraft](https://vibecraft.today/): an AI tool that turns one conversation into a website, a book, a game or a piece of art, designed for everyone from eight to eighty. Deborah is the product designer.
 - [Indic8](https://indic8.app/): an AI signal engine that turns market news across crypto, stocks, forex and commodities into clear, explained buy ideas with a confidence score. Deborah is the product designer.
-- [This portfolio](https://www.deborahdavid.site/work/portfolio): Deborah's own portfolio website. She designed and art-directed every detail and built it with AI, from mood board to deborahdavid.site.
+- [This portfolio](https://www.deborahdavid.me/work/portfolio): Deborah's own portfolio website. She designed and art-directed every detail and built it with AI, from mood board to deborahdavid.me.
 
 ## Pages
-- [Home](https://www.deborahdavid.site/)
-- [Work](https://www.deborahdavid.site/work)
-- [About](https://www.deborahdavid.site/about)
-- [Contact](https://www.deborahdavid.site/contact)
-- [HumStage case study](https://www.deborahdavid.site/work/humstage)
-- [VibeCraft case study](https://www.deborahdavid.site/work/vibecraft)
-- [Indic8 case study](https://www.deborahdavid.site/work/indic8)
-- [This portfolio, a case study](https://www.deborahdavid.site/work/portfolio)
+- [Home](https://www.deborahdavid.me/)
+- [Work](https://www.deborahdavid.me/work)
+- [About](https://www.deborahdavid.me/about)
+- [Contact](https://www.deborahdavid.me/contact)
+- [HumStage case study](https://www.deborahdavid.me/work/humstage)
+- [VibeCraft case study](https://www.deborahdavid.me/work/vibecraft)
+- [Indic8 case study](https://www.deborahdavid.me/work/indic8)
+- [This portfolio, a case study](https://www.deborahdavid.me/work/portfolio)
 
 ## Contact
-- Website: https://www.deborahdavid.site/
+- Website: https://www.deborahdavid.me/
 - Email: debeebest123@gmail.com
 - Instagram: https://www.instagram.com/crowned_beee/
 - TikTok: https://www.tiktok.com/@less.is.bee

@@ -13,4 +13,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://www.deborahdavid.site/sitemap.xml
+Sitemap: https://www.deborahdavid.me/sitemap.xml
