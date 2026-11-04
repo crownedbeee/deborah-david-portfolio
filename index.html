@@ -356,7 +356,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
 .tk:hover p,.tk:focus-visible p,.tk.open p{opacity:1;transform:none;}
 .tk{cursor:default;outline:none;}
 .tk:focus-visible::before{transform:scaleX(1);}
-@media (hover:none),(max-width:699px){ .tk p{opacity:1;transform:none;} .tk,.tk:last-child{border:0;padding:24px 22px;} .tk + .tk{margin-top:12px;} .tk::before{inset:0;transform:none;transition:none;} }
+@media (max-width:899px){ .tk p{opacity:1;transform:none;} .tk,.tk:last-child{border:0;padding:24px 22px;} .tk + .tk{margin-top:12px;} .tk::before{inset:0;transform:none;transition:none;} }
 
 
 /* case study screenshots: one row, one height */
@@ -964,6 +964,48 @@ html.page-in #nav, html.page-in #main{transition:transform .9s cubic-bezier(.76,
 .sel-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;max-width:620px!important;}
 @media (min-width:900px){ .sel-list{grid-template-columns:repeat(4,minmax(0,1fr))!important;max-width:980px!important;} }
 .sel-list a{justify-content:center;white-space:nowrap;}
+
+/* ---- v3: fields turn white when active or filled; custom dropdown ---- */
+.cpage .field input:focus,.cpage .field textarea:focus,.cpage .field.filled input,.cpage .field.filled textarea,
+.cform .field input:focus,.cform .field textarea:focus,.cform .field.filled input,.cform .field.filled textarea{background-color:#fff!important;}
+.cform .field input:-webkit-autofill,.cform .field input:-webkit-autofill:hover,.cform .field input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 1000px #fff inset!important;-webkit-text-fill-color:var(--ink)!important;caret-color:var(--ink);}
+.dd{position:relative;}
+.dd select{position:absolute!important;inset:0;width:100%!important;height:100%!important;opacity:0!important;pointer-events:none!important;}
+.dd-btn{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;height:54px;padding:0 16px;font:inherit;font-size:16px;font-weight:500;color:var(--ink);text-align:left;background:transparent;border:1.5px solid rgba(18,17,16,.45);border-radius:0;cursor:pointer;transition:background-color .2s,border-color .2s,box-shadow .2s;}
+.dd-btn span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.dd-btn span.dd-ph{color:rgba(18,17,16,.6);font-weight:500;}
+.dd-btn svg{flex:none;transition:transform .25s var(--ease);}
+.dd.open .dd-btn svg{transform:rotate(180deg);}
+.dd-btn:focus-visible,.dd.open .dd-btn{outline:none;border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);}
+.dd.open .dd-btn,.field.filled .dd-btn{background:#fff;}
+.field.err .dd-btn{border-color:#B3261E;}
+.dd-list{position:absolute;left:0;right:0;top:calc(100% + 10px);z-index:40;margin:0;padding:6px;list-style:none;background:#fff;border:1.5px solid var(--ink);box-shadow:6px 6px 0 var(--ink);max-height:320px;overflow:auto;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s,transform .25s var(--ease),visibility 0s .25s;}
+.dd.open .dd-list{opacity:1;visibility:visible;transform:none;transition:opacity .2s,transform .25s var(--ease);}
+.dd-list li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 12px;font-size:15px;font-weight:500;line-height:1.35;color:var(--ink);cursor:pointer;transition:background-color .15s;}
+.dd-list li:hover,.dd-list li.act{background:var(--custard);}
+.dd-list li[aria-selected="true"]{font-weight:700;}
+.dd-list li[aria-selected="true"]::after{content:"";flex:none;width:7px;height:12px;margin-right:4px;border:solid var(--ink);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translateY(-2px);}
+html.beecur .dd-btn,html.beecur .dd-list li{cursor:pointer!important;}
+
+/* ---- v3: subtle reveal for every section block (uses `translate`, so it never fights hover transforms) ---- */
+.revl{opacity:0;translate:0 18px;transition:opacity .75s var(--ease),translate .75s var(--ease)!important;}
+.revl.in{opacity:1;translate:0 0;}
+@media (prefers-reduced-motion:reduce){.revl{opacity:1!important;translate:none!important;}}
+
+/* ---- v3 mobile: no half-empty full-screen sections; How I think as tap-to-open cards ---- */
+@media (max-width:699px){
+  .fs:not(.hero2):not(.ab-hero){min-height:0;padding-top:72px;padding-bottom:72px;}
+}
+@media (max-width:899px){
+  .tk{cursor:pointer;-webkit-tap-highlight-color:transparent;}
+  .tk h3{position:relative;padding-right:44px;}
+  .tk h3::after{content:"+";position:absolute;right:0;top:50%;translate:0 -50%;width:30px;height:30px;display:grid;place-items:center;border:1.5px solid currentColor;font-size:20px;font-weight:500;line-height:1;}
+  .tk.open h3::after{content:"\2212";background:var(--ink);color:var(--cream,#F6F0E4);border-color:var(--ink);}
+  .tk p{display:none;}
+  .tk.open p{display:block;animation:tkIn .45s var(--ease) both;}
+  .tk.open p.eg{animation-delay:.06s;}
+}
+@keyframes tkIn{from{opacity:0;translate:0 8px;}to{opacity:1;translate:0 0;}}
 </style>
 </head>
 <body>
@@ -1719,8 +1761,40 @@ function wire(){
   if (io) io.disconnect();
   const els = main.querySelectorAll('.rv');
   if (reduce || !('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); return; }
-  io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: .08 });
+  io = new IntersectionObserver(es => { let n = 0; es.forEach(e => { if (e.isIntersecting){ const t = e.target; if (!t.style.transitionDelay){ t.style.transitionDelay = Math.min(n++ * 80, 320) + 'ms'; setTimeout(() => { t.style.transitionDelay = ''; }, 1400); } t.classList.add('in'); io.unobserve(t); } }); }, { rootMargin: '0px 0px -8% 0px', threshold: .08 });
   els.forEach(e => io.observe(e));
+  autoReveal();
+}
+function autoReveal(){
+  if (reduce || !('IntersectionObserver' in window)) return;
+  const picked = [];
+  const take = (el, d) => {
+    if (!el || el.nodeType !== 1 || /^(SCRIPT|STYLE|svg)$/i.test(el.tagName)) return;
+    if (el.matches('.rv,.revl,[data-noreveal]') || getComputedStyle(el).position === 'absolute' || getComputedStyle(el).position === 'fixed') return;
+    const kids = [...el.children].filter(k => getComputedStyle(k).position !== 'absolute');
+    if (el.querySelector('.rv') || (d < 2 && kids.length >= 3 && kids.every(k => k.tagName === kids[0].tagName))){
+      if (d < 2) kids.forEach(k => take(k, d + 1));
+      return;
+    }
+    picked.push(el);
+  };
+  [...main.querySelectorAll('section')].forEach((sec, i) => {
+    if (i === 0 || sec.closest('.revl')) return;
+    const box = sec.querySelector(':scope > .wrap') || sec;
+    [...box.children].forEach(c => take(c, 0));
+  });
+  if (!picked.length) return;
+  const sio = new IntersectionObserver(es => {
+    let n = 0;
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target; sio.unobserve(el);
+      el.style.transitionDelay = Math.min(n++ * 70, 280) + 'ms';
+      el.classList.add('in');
+      setTimeout(() => { el.classList.remove('revl', 'in'); el.style.transitionDelay = ''; }, 1300);
+    });
+  }, { rootMargin: '0px 0px -6% 0px', threshold: .06 });
+  picked.forEach(el => { el.classList.add('revl'); sio.observe(el); });
 }
 function dropLetters(){
   const h = document.getElementById('heroTitle'); if (!h || h.dataset.done) return;
@@ -1796,11 +1870,51 @@ function wireParallax(){
 }
 function wireHabits(){
   main.querySelectorAll('.tk').forEach(tk => tk.addEventListener('click', () => {
-    if (window.matchMedia('(hover: none)').matches){ const o = tk.classList.contains('open'); main.querySelectorAll('.tk.open').forEach(x => x.classList.remove('open')); if (!o) tk.classList.add('open'); }
+    if (innerWidth < 900 || matchMedia('(hover: none)').matches || matchMedia('(pointer: coarse)').matches){ const o = tk.classList.contains('open'); main.querySelectorAll('.tk.open').forEach(x => x.classList.remove('open')); if (!o) tk.classList.add('open'); }
   }));
 }
 function wireForm(){
   const f = document.getElementById('cform'); if (!f) return;
+  const syncFilled = () => f.querySelectorAll('.field').forEach(fd => { const el = fd.querySelector('input,textarea,select'); if (el) fd.classList.toggle('filled', !!el.value.trim()); });
+  const sel = f.querySelector('#cfService');
+  let resetDD = () => {};
+  if (sel && !sel.closest('.dd')){
+    const wrap = document.createElement('div'); wrap.className = 'dd';
+    sel.parentNode.insertBefore(wrap, sel); wrap.appendChild(sel);
+    sel.tabIndex = -1; sel.setAttribute('aria-hidden', 'true');
+    const PH = (sel.options[0] && !sel.options[0].value) ? sel.options[0].text : 'Choose one';
+    const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'dd-btn'; btn.id = 'cfServiceBtn';
+    btn.setAttribute('aria-haspopup', 'listbox'); btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = '<span class="dd-ph"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+    const txt = btn.querySelector('span'); txt.textContent = PH;
+    const list = document.createElement('ul'); list.className = 'dd-list'; list.setAttribute('role', 'listbox');
+    [...sel.options].filter(o => o.value).forEach(o => { const li = document.createElement('li'); li.setAttribute('role', 'option'); li.setAttribute('aria-selected', 'false'); li.dataset.v = o.value; li.textContent = o.text; list.appendChild(li); });
+    wrap.appendChild(btn); wrap.appendChild(list);
+    const lab = f.querySelector('label[for="cfService"]'); if (lab) lab.htmlFor = 'cfServiceBtn';
+    const items = [...list.children]; let act = -1;
+    const setAct = i => { act = i; items.forEach((x, k) => x.classList.toggle('act', k === i)); if (items[i]) items[i].scrollIntoView({ block: 'nearest' }); };
+    const open = (o, kb) => { wrap.classList.toggle('open', o); btn.setAttribute('aria-expanded', String(o)); if (o && kb) setAct(Math.max(0, items.findIndex(x => x.dataset.v === sel.value))); else setAct(-1); };
+    const pick = li => {
+      sel.value = li.dataset.v; items.forEach(x => x.setAttribute('aria-selected', String(x === li)));
+      txt.textContent = li.textContent; txt.classList.remove("dd-ph");
+      const fd = wrap.closest('.field'); fd.classList.add('filled'); fd.classList.remove('err');
+      open(false); btn.focus();
+    };
+    resetDD = () => { items.forEach(x => x.setAttribute('aria-selected', 'false')); txt.textContent = PH; txt.classList.add("dd-ph"); open(false); };
+    items.forEach(li => li.addEventListener('click', () => pick(li)));
+    btn.addEventListener('click', () => open(!wrap.classList.contains('open')));
+    btn.addEventListener('keydown', e => {
+      const o = wrap.classList.contains('open');
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp'){ e.preventDefault(); if (!o){ open(true, true); return; } setAct((act + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length); }
+      else if (e.key === 'Enter' && o && items[act]){ e.preventDefault(); pick(items[act]); }
+      else if (e.key === 'Escape' || e.key === 'Tab'){ open(false); }
+    });
+    document.addEventListener('click', e => { if (document.body.contains(wrap) && !wrap.contains(e.target)) open(false); });
+  }
+  f.addEventListener('input', syncFilled);
+  f.addEventListener('change', syncFilled);
+  f.addEventListener('reset', () => setTimeout(() => { syncFilled(); resetDD(); }, 0));
+  setTimeout(syncFilled, 600);
   f.addEventListener('submit', e => {
     e.preventDefault();
     let ok = true;
@@ -1810,15 +1924,16 @@ function wireForm(){
     const v = id => document.getElementById(id).value.trim();
     const btn = f.querySelector('button[type="submit"]'), label = btn.textContent;
     btn.disabled = true; btn.textContent = 'Sending...'; note.textContent = '';
-    fetch('https://formsubmit.co/ajax/' + CONFIG.email, {
+    fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        name: v('cfName'), email: v('cfEmail'), need: v('cfService'), message: v('cfMsg'),
-        _subject: `New message from your website: ${v('cfName')}`,
-        _replyto: v('cfEmail'),
-        _template: 'table', _captcha: 'false',
-        _autoresponse: `Hi ${v('cfName')}, thank you for reaching out! Your message reached me and I'll get back to you soon. Deborah (DeBee)`
+        access_key: 'f626321f-98d6-4f76-b482-352649125220',
+        subject: `New message from your website: ${v('cfName')}`,
+        from_name: 'deborahdavid.me',
+        name: v('cfName'), email: v('cfEmail'), replyto: v('cfEmail'),
+        need: v('cfService'), message: v('cfMsg'),
+        botcheck: ''
       })
     }).then(res => res.json()).then(d => {
       if (d && (d.success === true || d.success === 'true')){
