@@ -1006,11 +1006,94 @@ html.beecur .dd-btn,html.beecur .dd-list li{cursor:pointer!important;}
   .tk.open p.eg{animation-delay:.06s;}
 }
 @keyframes tkIn{from{opacity:0;translate:0 8px;}to{opacity:1;translate:0 0;}}
+
+/* ===== v4: cards like the UGC site, white scripts on honey, two-line footer ===== */
+/* What I do: white cards with a thick shadow that grows in */
+.do-card{background:#fff!important;border:1.5px solid var(--ink)!important;border-radius:0!important;box-shadow:0 0 0 var(--ink);padding:28px 26px;}
+.do-card.rv{transition:opacity .8s var(--ease),transform .8s var(--ease),box-shadow .6s var(--ease) .35s;}
+.do-card.rv.in,.do-card:not(.rv){box-shadow:6px 6px 0 var(--ink);}
+.ink .do-card.rv.in,.ink .do-card:not(.rv){box-shadow:6px 6px 0 var(--honey);}
+.do-card h3{color:var(--ink)!important;}
+.do-card p{color:#3a352c!important;}
+.do-card .tag{border-radius:0!important;color:var(--honey-d)!important;border-color:rgba(184,122,18,.55)!important;}
+.do-grid{gap:18px;}
+/* How I think: bordered cards with big numbers */
+.think-list{display:grid!important;grid-template-columns:1fr;gap:12px;}
+@media (min-width:900px){ .think-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;} }
+.tk,.tk:last-child,.tk + .tk{border:1.5px solid rgba(18,17,16,.32)!important;margin:0!important;padding:24px 22px!important;transition:background-color .35s,border-color .35s;}
+.tk::before{display:none!important;}
+.tk .tk-n{display:block;font-family:var(--display);font-weight:400;font-size:40px;letter-spacing:.02em;line-height:1;}
+.honey.habits .tk-n{color:#fff!important;}
+.cream.habits .tk-n,.habits:not(.honey) .tk-n{color:var(--honey-d);}
+.tk h3{margin-top:10px!important;transition:color .3s;}
+@media (min-width:900px){
+  .tk:hover,.tk:focus-visible,.tk.open{background:var(--ink);border-color:var(--ink)!important;}
+  .tk:hover h3,.tk:focus-visible h3,.tk.open h3{color:var(--cream)!important;}
+  .tk:hover .tk-n,.tk:focus-visible .tk-n,.tk.open .tk-n{color:var(--honey)!important;}
+  .tk:hover p,.tk:focus-visible p,.tk.open p{color:#cfc8ba!important;}
+  .tk:hover .eg b,.tk:focus-visible .eg b,.tk.open .eg b{color:var(--cream)!important;}
+}
+/* white handwriting on honey, headings stay dark */
+.honey .script{color:#fff!important;}
+.honey.habits h2{color:var(--ink)!important;}
+/* footer: "Less is Bee." and "Bee is more." each fill the full width */
+.foot .foot-name.lib{flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;width:100%;position:relative;}
+.foot .lib-l1,.foot .lib-l2{white-space:nowrap;align-self:flex-start!important;margin:0!important;}
+.foot .lib-l1{transform-origin:0 100%;transform:scale(var(--sm,1));transition:opacity .6s ease,transform .45s cubic-bezier(.3,.7,.3,1) .5s;}
+.foot .lib.play .lib-l1{transform:scale(var(--sm,1));}
+.foot .lib.play.hit .lib-l1,.foot .lib.play.done .lib-l1,.foot .lib.done .lib-l1{transform:none;}
+.foot .lib-l2{margin-top:.04em!important;}
+.lib-probe{position:absolute;left:0;top:0;visibility:hidden;white-space:nowrap;font-size:100px;pointer-events:none;letter-spacing:.01em;}
+.foot .lib-l1{letter-spacing:.01em;}
+/* ---- footer: "more." is knocked down and lands at the end of line 2, then "Bee is" joins it ---- */
+:is(#lib,#loaderLib) .lib-l2{opacity:1!important;translate:none!important;transform:none!important;transition:none!important;}
+:is(#lib,#loaderLib) .lib-pre{display:inline-block;opacity:0;transform:translateX(-.35em);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.8,.2,1);}
+:is(#lib,#loaderLib).l2 .lib-pre{opacity:1;transform:none;}
+:is(#lib,#loaderLib) .lib-more2{display:inline-block;opacity:0;}
+:is(#lib,#loaderLib).landed .lib-more2{opacity:1;}
+:is(#lib,#loaderLib).hit .lib-more{animation:none!important;opacity:0!important;}
+:is(#lib,#loaderLib){position:relative;}
+:is(#lib,#loaderLib) .lib-fall{position:absolute;left:0;top:0;display:block;white-space:nowrap;pointer-events:none;transform-origin:0 0;will-change:transform;}
+@media (prefers-reduced-motion:reduce){ :is(#lib,#loaderLib) .lib-pre,:is(#lib,#loaderLib) .lib-more2{opacity:1!important;transform:none!important;} }
+
+/* ===== v5: hero entrance and scroll movement ===== */
+/* hero: pieces arrive one after another once the loading screen leaves */
+html:not(.hero-go) .hero2 .hero2-cut,html:not(.hero-go) .hero2 .script.hi,html:not(.hero-go) .hero2 .picker,html:not(.hero-go) .hero2 .hero2-line,html:not(.hero-go) .hero2 .btns,
+html:not(.hero-go) .ab-hero-cut,html:not(.hero-go) .ab-hero-foot{opacity:0;}
+html.hero-go .hero2 .hero2-cut,html.hero-go .ab-hero-cut{animation:hgRise 1.15s var(--ease) .15s both;}
+html.hero-go .hero2 .script.hi{animation:hgPop .8s cubic-bezier(.2,.9,.25,1.3) .55s both;}
+html.hero-go .hero2 .picker{animation:hgPick .75s cubic-bezier(.2,.9,.25,1.35) 1s both;}
+html.hero-go .hero2 .hero2-line,html.hero-go .ab-hero-foot{animation:hgUp .85s var(--ease) .7s both;}
+html.hero-go .hero2 .btns{animation:hgUp .85s var(--ease) .85s both;}
+@keyframes hgRise{from{opacity:0;translate:0 60px;scale:.97;}to{opacity:1;translate:0 0;scale:1;}}
+@keyframes hgPop{from{opacity:0;rotate:-14deg;scale:.7;}to{opacity:1;rotate:0deg;scale:1;}}
+@keyframes hgPick{from{opacity:0;rotate:-12deg;scale:.6;}to{opacity:1;rotate:0deg;scale:1;}}
+@keyframes hgUp{from{opacity:0;translate:0 26px;}to{opacity:1;translate:0 0;}}
+/* section headings: rise out of a mask */
+.rv > h2.display,.rv > .display,.rv > .fit{clip-path:inset(0 -20% 100% -20%);translate:0 .3em;transition:clip-path 1s var(--ease) .12s,translate 1s var(--ease) .12s;}
+.rv.in > h2.display,.rv.in > .display,.rv.in > .fit{clip-path:inset(-40% -20% -40% -20%);translate:0 0;}
+/* handwriting: swings in */
+.rv > .script{opacity:0;rotate:-10deg;scale:.85;transition:opacity .6s ease .05s,rotate .8s cubic-bezier(.2,.9,.25,1.35) .05s,scale .8s cubic-bezier(.2,.9,.25,1.35) .05s;}
+.rv.in > .script{opacity:1;rotate:0deg;scale:1;}
+/* project images grow gently into place */
+.proj-art.rv{scale:.93;transition:opacity .9s var(--ease),transform .9s var(--ease),scale 1.2s var(--ease);}
+.proj-art.rv.in{scale:1;}
+/* How I think: each number slides up after its card */
+.tk.rv .tk-n{opacity:0;translate:0 .7em;transition:opacity .5s ease .2s,translate .75s cubic-bezier(.2,.9,.25,1.2) .2s;}
+.tk.rv.in .tk-n{opacity:1;translate:0 0;}
+/* What I do: the tag pops after the card lands */
+.do-card.rv .tag{opacity:0;scale:.7;transition:opacity .4s ease .45s,scale .6s cubic-bezier(.2,.9,.25,1.4) .45s;}
+.do-card.rv.in .tag{opacity:1;scale:1;}
+@media (prefers-reduced-motion:reduce){
+  html .hero2 *,html .ab-hero-cut,html .ab-hero-foot{animation:none!important;opacity:1!important;}
+  .rv > h2.display,.rv > .display,.rv > .fit{clip-path:none!important;translate:none!important;}
+  .rv > .script,.tk.rv .tk-n,.do-card.rv .tag{opacity:1!important;rotate:none!important;scale:none!important;translate:none!important;}
+}
 </style>
 </head>
 <body>
 <div class="loader honey" id="loader" aria-hidden="true"><div class="lib" id="loaderLib"><span class="lib-l1">Less is <span class="lib-slot"><span class="lib-more">more.</span><span class="lib-bee">Bee.</span></span></span><span class="lib-l2"><em>Bee</em> is more.</span></div></div>
-<script>(function(){var d=document.documentElement,L=document.getElementById('loader');try{if(sessionStorage.getItem('ddLoader')||matchMedia('(prefers-reduced-motion: reduce)').matches){L.parentNode.removeChild(L);return;}sessionStorage.setItem('ddLoader','1');if(localStorage.getItem('heroTone')==='ink'){L.className='loader ink';}}catch(e){}d.classList.add('is-loading');setTimeout(function(){d.classList.remove('is-loading');},7000);})();</script>
+<script>(function(){var d=document.documentElement,L=document.getElementById('loader');try{if(matchMedia('(prefers-reduced-motion: reduce)').matches){L.parentNode.removeChild(L);return;}if(localStorage.getItem('heroTone')==='ink'){L.className='loader ink';}}catch(e){}d.classList.add('is-loading');setTimeout(function(){d.classList.remove('is-loading');},7000);})();</script>
 <noscript><style>.loader{display:none!important}</style></noscript>
 <a class="skip" href="#main">Skip to content</a>
 
@@ -1103,7 +1186,7 @@ const PROJECTS = {
       ["Less is Bee, explained", "A short animation turns \"less is more\" into \"Less is Bee. Bee is more.\""],
       ["A bee to follow", "A flying bee lands on headings as you scroll, and on computers the cursor is a bee."],
       ["Easy to find", "Clean page addresses, Google and Bing set up, and a summary file so AI tools describe me correctly."],
-      ["Messages straight to my inbox", "The contact form sends directly to my email, with a thank-you reply to the sender."]
+      ["Messages straight to my inbox", "The contact form sends every message directly to my email, with a custom dropdown in the site's own style."]
     ],
     desktop: "pfD", mobile: "pfMHoney", bar: { bg: "#DFA42C", fg: "#121110" }, desktopAlt: "The deborahdavid.me home page on desktop, with the big DEBORAH title and the honey or black picker", mobileAlt: "The deborahdavid.me home page on a phone"
   },
@@ -1970,6 +2053,80 @@ document.getElementById('toTop').addEventListener('click', e => { e.preventDefau
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(size);
   addEventListener('resize', size);
 })();
+
+/* footer lines sized to fill the width exactly */
+(function(){
+  const lib = document.getElementById('lib'); if (!lib) return;
+  const l1 = lib.querySelector('.lib-l1'), l2 = lib.querySelector('.lib-l2');
+  const probe = document.createElement('span'); probe.className = 'lib-probe'; probe.setAttribute('aria-hidden', 'true'); lib.appendChild(probe);
+  const w = t => { probe.textContent = t; return probe.getBoundingClientRect().width; };
+  let k = 1;
+  const fit = () => {
+    const W = lib.clientWidth; if (!W) return;
+    const wBee = w('Less is Bee.');
+    l1.style.setProperty('font-size', (k * 100 * W / wBee) + 'px', 'important');
+    l2.style.setProperty('font-size', (100 * W / w('Bee is more.')) + 'px', 'important');
+    lib.style.setProperty('--sm', Math.min(1, wBee / w('Less is more.')));
+    window.dispatchEvent(new Event('resize'));
+  };
+  /* once the line settles on "Less is Bee.", correct any tiny difference so it ends exactly at the edge */
+  new MutationObserver(() => {
+    if (!lib.classList.contains('l2')) return;
+    setTimeout(() => { const W = lib.clientWidth, real = l1.getBoundingClientRect().width; if (W && real && Math.abs(real - W) > 2){ k *= W / real; fit(); } }, 700);
+  }).observe(lib, { attributes: true, attributeFilter: ['class'] });
+  fit(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { fit(); window.dispatchEvent(new Event('resize')); });
+  let t; addEventListener('resize', e => { if (e.isTrusted){ clearTimeout(t); t = setTimeout(() => { fit(); }, 60); } });
+})();
+/* "Less is more." -> Bee knocks "more." down -> it lands at the end of line 2 -> "Bee is" slides in to meet it.
+   Used by the footer (#lib) and the loading screen (#loaderLib). */
+function libFall(lib, dur){
+  if (!lib) return;
+  const l2 = lib.querySelector('.lib-l2'), more = lib.querySelector('.lib-more'); if (!l2 || !more) return;
+  if (!l2.querySelector('.lib-more2')) l2.innerHTML = '<span class="lib-pre"><em>Bee</em> is</span> <span class="lib-more2">more.</span>';
+  const more2 = l2.querySelector('.lib-more2');
+  let clone = null, fallen = false;
+  const cleanup = () => { if (clone){ clone.remove(); clone = null; } };
+  const land = () => { cleanup(); if (!lib.classList.contains('landed')) lib.classList.add('landed'); };
+  const fall = () => {
+    cleanup();
+    const L = lib.getBoundingClientRect(), a = more.getBoundingClientRect(), b = more2.getBoundingClientRect();
+    if (!a.width || !b.width || !more.offsetWidth || !('animate' in Element.prototype)) return land();
+    const cs = getComputedStyle(more), s0 = a.width / more.offsetWidth;
+    clone = document.createElement('span'); clone.className = 'lib-fall'; clone.textContent = more.textContent; clone.setAttribute('aria-hidden', 'true');
+    clone.style.fontSize = (parseFloat(cs.fontSize) * s0) + 'px';
+    clone.style.lineHeight = (more.offsetHeight * s0) + 'px';
+    clone.style.letterSpacing = (parseFloat(cs.letterSpacing) * s0 || 0) + 'px';
+    clone.style.left = (a.left - L.left) + 'px'; clone.style.top = (a.top - L.top) + 'px';
+    lib.appendChild(clone);
+    const k = b.width / a.width, dx = b.left - a.left, dy = b.top - a.top, hop = b.height * .14;
+    clone.animate([
+      { transform: 'translate(0px,0px) rotate(0deg) scale(1)', offset: 0, easing: 'ease-out' },
+      { transform: `translate(${dx * .04}px,${-hop * .6}px) rotate(-5deg) scale(1)`, offset: .14, easing: 'cubic-bezier(.55,0,1,.45)' },
+      { transform: `translate(${dx}px,${dy}px) rotate(0deg) scale(${k})`, offset: .7, easing: 'ease-out' },
+      { transform: `translate(${dx}px,${dy - hop}px) rotate(0deg) scale(${k})`, offset: .83, easing: 'ease-in' },
+      { transform: `translate(${dx}px,${dy}px) rotate(0deg) scale(${k})`, offset: 1 }
+    ], { duration: dur || 950, fill: 'forwards' }).onfinish = land;
+  };
+  const playing = () => lib.classList.contains('play') || lib.id === 'loaderLib';
+  new MutationObserver(() => {
+    const c = lib.classList;
+    if (!playing()){ fallen = false; cleanup(); if (c.contains('landed')) c.remove('landed'); return; }
+    if (c.contains('hit') && !fallen){ fallen = true; fall(); }
+    else if ((c.contains('done') || c.contains('l2')) && !fallen){ fallen = true; land(); }
+  }).observe(lib, { attributes: true, attributeFilter: ['class'] });
+  if (lib.classList.contains('l2') || lib.classList.contains('done')){ fallen = true; land(); }
+}
+libFall(document.getElementById('lib'), 950);
+libFall(document.getElementById('loaderLib'), 760);
+
+
+/* hero entrance starts once the loading screen has gone (or right away if it isn't showing) */
+(function(){
+  const d = document.documentElement, go = () => d.classList.add('hero-go');
+  if (!document.getElementById('loader') || !d.classList.contains('is-loading')) return go();
+  new MutationObserver((m, o) => { if (!d.classList.contains('is-loading')){ go(); o.disconnect(); } }).observe(d, { attributes: true, attributeFilter: ['class'] });
+  setTimeout(go, 7200);
+})();
 route();
 /* bee cursor: follows the mouse exactly, turns to face the way it flies */
 (function(){
@@ -2013,8 +2170,8 @@ route();
     timers.push(setTimeout(() => lib.classList.add('drop'), 250));
     timers.push(setTimeout(() => lib.classList.add('hit'), 250 + 350));
     timers.push(setTimeout(() => { slot.style.width = bee.offsetWidth + 'px'; }, 250 + 760));
-    timers.push(setTimeout(() => lib.classList.add('l2'), 250 + 900));
-    timers.push(setTimeout(done, 250 + 1900));
+    timers.push(setTimeout(() => lib.classList.add('l2'), 250 + 1150));
+    timers.push(setTimeout(done, 250 + 2050));
   };
   (document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 300))]) : Promise.resolve()).then(start);
 })();
